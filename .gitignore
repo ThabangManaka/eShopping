@@ -1,0 +1,62 @@
+# Build
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider
+.idea/
+
+# VS Code
+.vscode/
+
+# ASP.NET Core
+appsettings.Development.json
+
+# Logs
+*.log
+logs/
+
+# NuGet
+*.nupkg
+packages/
+
+# Angular
+Client/node_modules/
+Client/dist/
+Client/.angular/
+Client/.cache/
+
+# npm
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Docker
+**/.dockerignore
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test Results
+TestResults/
+
+# Coverage
+coverage/
+
+# Publish
+publish/
+
+# Environment
+.env
+.env.*
+
+# Temporary files
+*.tmp
+*.temp
