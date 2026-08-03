@@ -1,0 +1,156 @@
+<div class="container">
+  <div class="row">
+
+<section class="col-3">
+
+  @if (products) {
+
+    <h5 class="text-warning mb-3">Sort</h5>
+
+    <select
+      class="form-select mb-3"
+      (change)="onSortSelected($any($event.target).value)">
+
+      @for (sort of sortOptions; track sort.value) {
+        <option [value]="sort.value">
+          {{ sort.name }}
+        </option>
+      }
+
+    </select>
+
+    <h5 class="text-warning ms-3">Brands</h5>
+
+    <ul class="list-group my-3">
+
+      @for (brand of brands; track brand.id) {
+        <li
+          class="list-group-item"
+          [class.active]="brand.id === storeParams.brandId"
+          (click)="onBrandSelected(brand.id)">
+
+          {{ brand.name }}
+
+        </li>
+      }
+
+    </ul>
+
+    <h5 class="text-warning ms-3">Types</h5>
+
+    <ul class="list-group my-3">
+
+      @for (type of types; track type.id) {
+        <li
+          class="list-group-item"
+          [class.active]="type.id === storeParams.typeId"
+          (click)="onTypeSelected(type.id)">
+
+          {{ type.name }}
+
+        </li>
+      }
+
+    </ul>
+  }
+
+</section>
+
+     <section class="col-9">
+
+  <div class="d-flex justify-content-between align-items-center pb-2">
+
+    <header>
+
+      @if (totalCount && totalCount > 0) {
+        <span>
+          Showing
+          <strong>
+            {{ (storeParams.pageNumber - 1) * storeParams.pageSize + 1 }}
+            -
+            {{
+              storeParams.pageNumber * storeParams.pageSize > totalCount
+                ? totalCount
+                : storeParams.pageNumber * storeParams.pageSize
+            }}
+          </strong>
+          of
+          <strong>{{ totalCount }}</strong>
+          Results
+        </span>
+      }
+
+      @if (totalCount === 0) {
+        <span>
+          There are <strong>0</strong> results for this filter
+        </span>
+      }
+
+    </header>
+
+    <div class="form-inline mt-2">
+      <input
+        #search
+        class="form-control me-2"
+        style="width:300px"
+        placeholder="Search"
+        type="text"
+        (keyup.enter)="onSearch()">
+
+      <button
+        class="btn btn-outline-primary my-2"
+        (click)="onSearch()">
+        Search
+      </button>
+
+      <button
+        class="btn btn-outline-primary ms-2 my-2"
+        (click)="onReset()">
+        Reset
+      </button>
+    </div>
+
+  </div>
+
+  <div class="d-flex justify-content-center">
+
+    <pagination
+      [boundaryLinks]="true"
+      [totalItems]="totalCount"
+      [itemsPerPage]="storeParams.pageSize"
+      [maxSize]="10"
+      previousText="&lsaquo;"
+      nextText="&rsaquo;"
+      firstText="&laquo;"
+      lastText="&raquo;"
+      (pageChanged)="onPageChanged($event)">
+    </pagination>
+
+  </div>
+
+  <div class="row row-cols-3 g-3">
+
+    <!-- @for (item of products; track item.id) {
+      <div class="col">
+        <app-product-items [product]="item"></app-product-items>
+      </div>
+    } -->
+
+  </div>
+
+</section>
+      <div class="d-flex justify-content-center">
+        <pagination
+          [boundaryLinks]="true"
+          [totalItems]="this.totalCount"
+          previousText="&lsaquo;"
+          (pageChanged)="onPageChanged($event)"
+          [itemsPerPage]="this.storeParams.pageSize"
+          [maxSize]="10"
+          nextText="&rsaquo;"
+          firstText="&laquo;"
+          lastText="&raquo;">
+        </pagination>
+      </div>
+</div>
+</div>
