@@ -10,7 +10,6 @@ import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
   styleUrl: './home.scss',
 })
 export class Home {
-    onSlide(event: any) {
-    console.log(event);
-  }
+
+  
 }
