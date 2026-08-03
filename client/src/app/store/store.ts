@@ -6,10 +6,11 @@ import { IProduct } from '../shared/Models/product';
 import { IBrand } from '../shared/Models/brand';
 import { IType } from '../shared/Models/type';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { ProductItems } from './product-items/product-items';
 
 @Component({
   selector: 'app-store',
-  imports: [CommonModule,PaginationModule],
+  imports: [CommonModule,PaginationModule,ProductItems],
   templateUrl: './store.html',
   styleUrl: './store.scss',
 })
