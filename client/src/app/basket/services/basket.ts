@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
@@ -34,6 +34,22 @@ export class BasketService {
       }
     });
   }
+
+  
+  // checkoutBasket(basket: IBasket){
+  //   const httpOptions = {
+  //     headers: new HttpHeaders({
+  //       'Content-Type':  'application/json',
+  //       'Authorization': this.acntService.authorizationHeaderValue
+  //     })
+  //   };
+  //   return this.http.post<IBasket>(this.baseUrl +'/Basket/CheckoutV2', basket, httpOptions).subscribe({
+  //     next: basket =>{
+  //       this.basketSource.next(null);
+  //       this.router.navigateByUrl('/');
+  //     }
+  //   });
+  // }
 
      getCurrentBasket(){
     return this.basketSource.value;

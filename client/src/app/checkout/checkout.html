@@ -1,1 +1,95 @@
-<p>checkout works!</p>
+@if (basketService.basketSource$ | async; as basket) {
+
+  <div class="container mt-5">
+
+    @if (basket.items.length > 0) {
+
+      <div class="table-responsive">
+        <table class="table">
+
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Total</th>
+              <th>Remove</th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            @for (item of basket.items; track item.productId) {
+              <tr>
+
+                <td>
+                  <div class="d-flex align-items-center">
+                    <img
+                      [src]="item.imageFile"
+                      [alt]="item.productName"
+                      class="img-fluid"
+                      style="width:70px">
+
+                    <div class="ms-3">
+                      <a [routerLink]="['/store', item.productId]">
+                        {{ item.productName }}
+                      </a>
+                    </div>
+                  </div>
+                </td>
+
+                <td>{{ item.price | currency:'ZAR' }}</td>
+
+                <td>
+                  <button (click)="decrementItem(item)">
+                    <i class="fa fa-minus"></i>
+                  </button>
+
+                  {{ item.quantity }}
+
+                  <button (click)="incrementItem(item)">
+                    <i class="fa fa-plus"></i>
+                  </button>
+                </td>
+
+                <td>
+                  {{ item.price * item.quantity | currency:'ZAR' }}
+                </td>
+
+                <td>
+                  <button (click)="removeBasketItem(item)">
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </td>
+
+              </tr>
+            }
+
+          </tbody>
+
+        </table>
+      </div>
+
+       <div class="row">
+        <div class="col-6 offset-6">
+          <app-order-summary></app-order-summary>
+          <a (click)="orderNow(basket)" class="btn btn-outline-primary py-2 btn-block">
+            Order Now
+          </a>
+        </div>
+      </div>
+
+    } @else {
+
+      <div class="text-center py-5">
+        <h3>Your basket is empty</h3>
+        <a routerLink="/store" class="btn btn-primary">
+          Continue Shopping
+        </a>
+      </div>
+
+    }
+
+  </div>
+
+}
