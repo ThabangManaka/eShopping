@@ -3,10 +3,11 @@ import { BasketService } from './services/basket';
 import { RouterLink } from '@angular/router';
 import { AsyncPipe, CurrencyPipe } from '@angular/common';
 import { IBasketItem } from '../shared/Models/basket';
+import { OrderSummary } from '../shared/order-summary/order-summary';
 
 @Component({
   selector: 'app-basket',
-  imports: [AsyncPipe,RouterLink,CurrencyPipe],
+  imports: [OrderSummary,AsyncPipe,RouterLink,CurrencyPipe,],
   templateUrl: './basket.html',
   styleUrl: './basket.scss',
 })

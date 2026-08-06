@@ -1,0 +1,13 @@
+<div class="bg-info px-4 text-uppercase font-weight-bold">
+  Order Details
+</div>
+<div class="p-4">
+  @if (basketService.basketTotal$ | async; as total) {
+  <ul class="list-unstyled mb-4">
+    <li class="d-flex justify-content-between py-3 border-bottom">
+      <strong>Total:</strong>
+      <strong>{{ total.total | currency:'ZAR' }}</strong>
+    </li>
+  </ul>
+}
+</div>
