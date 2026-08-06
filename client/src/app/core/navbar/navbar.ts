@@ -1,13 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { BasketService } from '../../basket/services/basket';
+import { IBasketItem } from '../../shared/Models/basket';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
-  imports: [],
+  imports: [ AsyncPipe,
+     RouterLink,
+    RouterLinkActive],
   templateUrl: './navbar.html',
   styleUrl: './navbar.scss',
 })
 export class NavbarComponent implements OnInit {
-  constructor(){}
+  constructor(public basketService: BasketService){}
   ngOnInit(): void {
 
     // console.log(`current user:`);
@@ -21,9 +27,9 @@ export class NavbarComponent implements OnInit {
   //  })
   }
   public isUserAuthenticated: boolean = false;
-  // getBasketCount(items: IBasketItem[]){
-  //   return items.reduce((sum, item)=>sum + item.quantity, 0);
-  // }
+  getBasketCount(items: IBasketItem[]){
+    return items.reduce((sum, item)=>sum + item.quantity, 0);
+  }
   public login = () => {
     //this.acntService.login();
   }
