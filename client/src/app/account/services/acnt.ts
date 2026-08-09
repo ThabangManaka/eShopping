@@ -1,85 +1,64 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { ReplaySubject } from 'rxjs/internal/ReplaySubject';
-import { User, UserManager, UserManagerSettings } from 'oidc-client-ts';
-import { Constants } from '../constants';
+import { ReplaySubject, Observable } from 'rxjs';
+import { ILoginRequest } from '../../shared/Models/login';
+
+export interface LoginResponse {
+  token: string;
+}
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class AcntService {
 
-   private currentUserSource = new ReplaySubject<any>(1);
+  private baseUrl = 'https://localhost:7203/api/Auth';
+
+  private currentUserSource = new ReplaySubject<any>(1);
   currentUser$ = this.currentUserSource.asObservable();
-  private manager = new UserManager(getClientSettings());
-  private user!: User | null;
-  token = "";
-  access_token = "";
 
-  
-  constructor(private http: HttpClient, private router: Router) {
-    this.manager.getUser().then(user => {
-      this.user = user;
-      this.currentUserSource.next(this.isAuthenticated());
-    });
-  }
-    isAuthenticated(): boolean {
-    return this.user != null && !this.user.expired;
+  private token = '';
+
+  constructor(
+    private http: HttpClient,
+    private router: Router) {
+    this.token = localStorage.getItem('token') ?? '';
+    this.currentUserSource.next(this.isAuthenticated());
   }
 
-   login() {
-    return this.manager.signinRedirect();
+  login(model: ILoginRequest): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(
+      `${this.baseUrl}/login`,
+      model
+    );
   }
 
-  async signout() {
-    await this.manager.signoutRedirect();
+  saveToken(token: string): void {
+    this.token = token;
+    localStorage.setItem('token', token);
+
+    this.currentUserSource.next(true);
   }
 
-  get authorizationHeaderValue(): string {
-    console.log(this.token);
-    console.log(this.access_token);
-    return `${this.token} ${this.access_token}`;
+  getToken(): string | null {
+    return localStorage.getItem('token');
   }
 
-  logout() {
+  isAuthenticated(): boolean {
+    return !!this.getToken();
+  }
+
+  logout(): void {
+    this.token = '';
+
     localStorage.removeItem('token');
-    this.currentUserSource.next(null);
+
+    this.currentUserSource.next(false);
+
     this.router.navigateByUrl('/');
   }
 
-    public finishLogin = (): Promise<User> => {
-    return this.manager.signinRedirectCallback()
-    .then(user => {
-      this.currentUserSource.next(this.checkUser(user));
-      this.token = user.token_type;
-      this.access_token = user.access_token;
-      return user;
-    })
-  }
-
-  public finishLogout = () => {
-    this.user = null;
-    return this.manager.signoutRedirectCallback();
-  }
-    private checkUser = (user : User): boolean => {
-    console.log('inside check user');
-    console.log(user);
-    return !!user && !user.expired;
-  }
-}
-
-  
-export function getClientSettings(): UserManagerSettings {
-  return {
-    includeIdTokenInSilentRenew: true,
-    automaticSilentRenew: true,
-    silent_redirect_uri: `${Constants.clientRoot}/assets/silent-callback.html`,
-    authority: Constants.idpAuthority,
-    client_id: Constants.clientId,
-    redirect_uri: `${Constants.clientRoot}/signin-callback`,
-    scope: "openid profile eshoppinggateway",
-    response_type: "code",
-    post_logout_redirect_uri: `${Constants.clientRoot}/signout-callback`
-  };
+get authorizationHeaderValue(): string {
+   const token = this.getToken(); return token ? `Bearer ${token}` : ''; }
 }

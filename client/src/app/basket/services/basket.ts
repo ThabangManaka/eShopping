@@ -35,21 +35,6 @@ export class BasketService {
     });
   }
 
-  
-  // checkoutBasket(basket: IBasket){
-  //   const httpOptions = {
-  //     headers: new HttpHeaders({
-  //       'Content-Type':  'application/json',
-  //       'Authorization': this.acntService.authorizationHeaderValue
-  //     })
-  //   };
-  //   return this.http.post<IBasket>(this.baseUrl +'/Basket/CheckoutV2', basket, httpOptions).subscribe({
-  //     next: basket =>{
-  //       this.basketSource.next(null);
-  //       this.router.navigateByUrl('/');
-  //     }
-  //   });
-  // }
 
      getCurrentBasket(){
     return this.basketSource.value;
@@ -146,4 +131,8 @@ export class BasketService {
     this.basketTotal.next({total});
   }
 
+
+  clearBasket(): void {
+  this.basketSource.next(null);
+}
 }

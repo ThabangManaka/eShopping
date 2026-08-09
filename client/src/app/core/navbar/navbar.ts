@@ -3,6 +3,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { BasketService } from '../../basket/services/basket';
 import { IBasketItem } from '../../shared/Models/basket';
 import { AsyncPipe } from '@angular/common';
+import { AcntService } from '../../account/services/acnt';
 
 @Component({
   selector: 'app-navbar',
@@ -13,7 +14,7 @@ import { AsyncPipe } from '@angular/common';
   styleUrl: './navbar.scss',
 })
 export class NavbarComponent implements OnInit {
-  constructor(public basketService: BasketService){}
+  constructor(public basketService: BasketService,public acntService : AcntService){}
   ngOnInit(): void {
 
     // console.log(`current user:`);
@@ -30,9 +31,7 @@ export class NavbarComponent implements OnInit {
   getBasketCount(items: IBasketItem[]){
     return items.reduce((sum, item)=>sum + item.quantity, 0);
   }
-  public login = () => {
-    //this.acntService.login();
-  }
+
   public logout = () => {
     //this.acntService.signout();
   }

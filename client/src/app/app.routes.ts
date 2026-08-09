@@ -11,6 +11,7 @@ export const routes: Routes = [
     data: { breadcrumb: 'Product Details' }
     },
     { path: 'basket',loadComponent: () =>import('./basket/basket').then(c => c.Basket),data: { breadcrumb: 'basket' } }, 
-     { path: 'checkout',loadComponent: () =>import('./checkout/checkout').then(c => c.Checkout),data: { breadcrumb: 'basket' } }, 
+    { path: 'checkout',loadComponent: () =>import('./checkout/checkout').then(c => c.Checkout),data: { breadcrumb: 'basket' } }, 
+    { path: 'login',loadComponent: () =>import('./account/login/login').then(c => c.Login),data: { breadcrumb: 'login' } }, 
 
 ];
