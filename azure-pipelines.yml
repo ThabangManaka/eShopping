@@ -22,16 +22,18 @@ steps:
   displayName: 'Check Node.js and npm'
 
 - script: |
+    cd client
     npm install
-  displayName: 'Install dependencies'
+  displayName: 'Install Angular dependencies'
 
 - script: |
+    cd client
     npm run build
   displayName: 'Build Angular application'
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: 'dist/client/browser'
+    PathtoPublish: 'client/dist/client/browser'
     ArtifactName: 'angular-app'
     publishLocation: 'Container'
   displayName: 'Publish Angular build'
