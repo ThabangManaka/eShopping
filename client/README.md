@@ -1,59 +1,114 @@
-# Client
+# eShopping Angular Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.5.
+Angular frontend for the **eShopping** application.
 
-## Development server
+## 🚀 Live Application
 
-To start a local development server, run:
+**[View the Live Application](https://ecommerweb-f4frchgea6eradfx.southafricanorth-01.azurewebsites.net/)**
 
-```bash
-ng serve
-```
+## 🛠️ Technologies
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+* Angular 21
+* TypeScript
+* RxJS
+* Angular Material/CDK
+* PrimeNG
+* Bootstrap
+* Font Awesome
+* Swiper
+* OIDC Client
 
-## Code scaffolding
+## 📋 Prerequisites
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Before running the project locally, make sure you have:
 
-```bash
-ng generate component component-name
-```
+* Node.js 24+
+* npm 11+
+* Angular CLI 21+
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## 💻 Getting Started
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+Clone the repository:
 
 ```bash
-ng test
+git clone https://github.com/ThabangManaka/eShopping.git
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+Navigate to the Angular project:
 
 ```bash
-ng e2e
+cd eShopping/client
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Install dependencies:
 
-## Additional Resources
+```bash
+npm install
+```
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Start the development server:
+
+```bash
+npm start
+```
+
+Open:
+
+```text
+http://localhost:4200
+```
+
+## 🏗️ Build
+
+Create a production build:
+
+```bash
+npm run build
+```
+
+The production files are generated under:
+
+```text
+dist/client/browser
+```
+
+## ☁️ Deployment
+
+The Angular application is deployed to **Azure App Service**.
+
+The deployment pipeline builds the Angular application and publishes the contents of:
+
+```text
+dist/client/browser
+```
+
+The published artifact is:
+
+```text
+angular-app
+```
+
+## 🌐 Production
+
+Visit the deployed application:
+
+**[eShopping – Live Application](https://ecommerweb-f4frchgea6eradfx.southafricanorth-01.azurewebsites.net/)**
+
+## 📁 Project Structure
+
+```text
+client/
+├── src/
+├── public/
+├── angular.json
+├── package.json
+├── package-lock.json
+├── tsconfig.json
+└── README.md
+```
+
+## 👨‍💻 Author
+
+**Thabang Manaka**
+
+GitHub: [ThabangManaka](https://github.com/ThabangManaka)
