@@ -19,17 +19,10 @@ steps:
 - script: |
     node --version
     npm --version
-    pwd
-    ls -la
-  displayName: 'Check environment'
+  displayName: 'Check Node.js and npm'
 
 - script: |
-    npm install -g npm@11.11.0
-    npm --version
-  displayName: 'Install npm 11.11.0'
-
-- script: |
-    npm ci
+    npm install
   displayName: 'Install dependencies'
 
 - script: |
