@@ -17,6 +17,18 @@ steps:
   displayName: 'Install Node.js 24'
 
 - script: |
+    node --version
+    npm --version
+    pwd
+    ls -la
+  displayName: 'Check environment'
+
+- script: |
+    npm install -g npm@11.11.0
+    npm --version
+  displayName: 'Install npm 11.11.0'
+
+- script: |
     npm ci
   displayName: 'Install dependencies'
 
